@@ -1,6 +1,6 @@
 const path = require('path');
 const { ALIASES, IS_RELEASE, MINIMIZERS, plugins, rules } = require('./constants');
-const { openChromeBasedOnPlatform } = require('./helpers');
+require('./helpers');
 
 module.exports = function (env) {
     const base = env && env.base && env.base !== true ? `/${env.base}/` : '/';
@@ -10,12 +10,12 @@ module.exports = function (env) {
         context: path.resolve(__dirname, '../src'),
         devServer: {
             publicPath: base,
-            open: openChromeBasedOnPlatform(process.platform),
             openPage: sub_path,
             host: 'localhost',
             https: true,
             port: 8443,
             historyApiFallback: true,
+            hot: true,
             stats: {
                 colors: true,
             },
